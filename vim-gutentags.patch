@@ -1,0 +1,81 @@
+diff --git a/autoload/gutentags/cscope.vim b/autoload/gutentags/cscope.vim
+index 47f6bdf..87dd404 100644
+--- a/autoload/gutentags/cscope.vim
++++ b/autoload/gutentags/cscope.vim
+@@ -1,9 +1,9 @@
+ " Cscope module for Gutentags
+ 
+-if !has('cscope')
+-    throw "Can't enable the cscope module for Gutentags, this Vim has ".
+-                \"no support for cscope files."
+-endif
++" if !has('cscope')
++"     throw "Can't enable the cscope module for Gutentags, this Vim has ".
++"                 \"no support for cscope files."
++" endif
+ 
+ " Global Options {{{
+ 
+diff --git a/autoload/gutentags/cscope_maps.vim b/autoload/gutentags/cscope_maps.vim
+index 7f3769e..dfbb359 100644
+--- a/autoload/gutentags/cscope_maps.vim
++++ b/autoload/gutentags/cscope_maps.vim
+@@ -1,9 +1,9 @@
+ " cscope_maps module for Gutentags
+ 
+-if !has('nvim') || !exists(":Cscope")
+-    throw "Can't enable the cscope_maps module for Gutentags, this Vim has ".
+-                \"no support for cscope_maps files."
+-endif
++" if !has('nvim') || !exists(":Cscope")
++"     throw "Can't enable the cscope_maps module for Gutentags, this Vim has ".
++"                 \"no support for cscope_maps files."
++" endif
+ 
+ " Global Options {{{
+ 
+diff --git a/autoload/gutentags/gtags_cscope.vim b/autoload/gutentags/gtags_cscope.vim
+index 6a72243..61d8c58 100644
+--- a/autoload/gutentags/gtags_cscope.vim
++++ b/autoload/gutentags/gtags_cscope.vim
+@@ -1,9 +1,9 @@
+ " gtags_cscope module for Gutentags
+ 
+-if !has('cscope')
+-    throw "Can't enable the gtags-cscope module for Gutentags, "
+-                \"this Vim has no support for cscope files."
+-endif
++" if !has('cscope')
++"     throw "Can't enable the gtags-cscope module for Gutentags, "
++"                 \"this Vim has no support for cscope files."
++" endif
+ 
+ " Global Options {{{
+ 
+@@ -62,7 +62,7 @@ function! gutentags#gtags_cscope#init(project_root) abort
+ 
+     let b:gutentags_files['gtags_cscope'] = l:db_file
+ 
+-    execute 'set cscopeprg=' . fnameescape(g:gutentags_gtags_cscope_executable)
++    " execute 'set cscopeprg=' . fnameescape(g:gutentags_gtags_cscope_executable)
+ 
+     " The combination of gtags-cscope, vim's cscope and global files is
+     " a bit flaky. Environment variables are safer than vim passing
+diff --git a/autoload/gutentags/pycscope.vim b/autoload/gutentags/pycscope.vim
+index c0ca822..a4a29b8 100644
+--- a/autoload/gutentags/pycscope.vim
++++ b/autoload/gutentags/pycscope.vim
+@@ -1,9 +1,9 @@
+ " Pycscope module for Gutentags
+ 
+-if !has('cscope')
+-    throw "Can't enable the pycscope module for Gutentags, this Vim has ".
+-                \"no support for cscope files."
+-endif
++" if !has('cscope')
++"     throw "Can't enable the pycscope module for Gutentags, this Vim has ".
++"                 \"no support for cscope files."
++" endif
+ 
+ " Global Options {{{
+ 
