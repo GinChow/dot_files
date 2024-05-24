@@ -1,8 +1,8 @@
 " Configuration file for vim
-if !has('nvim')
-    set pythonthreedll=/Users/jin_zhou/.pyenv/versions/3.7.11/Library/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
-    set pythondll=/Users/jin_zhou/.pyenv/versions/3.7.11/Library/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
-endif
+" if !has('nvim')
+"     set pythonthreedll=/Users/jin_zhou/.pyenv/versions/3.7.11/Library/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
+"     set pythondll=/Users/jin_zhou/.pyenv/versions/3.7.11/Library/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib
+" endif
 set modelines=0		" CVE-2007-2438
 set encoding=utf-8
 " Normally we use vim-extensions. If you want true vi-compatibility
@@ -25,7 +25,6 @@ set tabstop=4
 set softtabstop=2
 set expandtab
 " end indent
-
 
 let skip_defaults_vim=1
 " Color theme
@@ -99,11 +98,11 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'godlygeek/tabular'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'skywind3000/gutentags_plus'
 Plugin 'skywind3000/vim-preview'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'SirVer/ultisnips'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'skywind3000/gutentags_plus'
+" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
 Plugin 'mhinz/vim-startify'
@@ -123,8 +122,8 @@ let mapleader = ","
 " config for Easymotion
 map <Leader><Leader>l <Plug>(easymotion-bd-jk)
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 
 " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
 " Without these mappings, `n` & `N` works fine. (These mappings just provide
@@ -148,7 +147,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
     \ quit | endif
 nnoremap <C-n> :call MyNERDTreeToggle()<CR>
 nnoremap <Leader>nf :NERDTreeFind<CR>
-let g:NERDTreeWinPos = "top"
+let g:NERDTreeWinPos = "right"
 
 " ctrlp config
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -191,8 +190,8 @@ let g:airline_theme='dracula'
 " tagbar config 
 nmap <F10> :TagbarToggle<CR>
 " YCM config
-let g:ycm_python_binary_path = '/Users/jin_zhou/.pyenv/shims/python'
-let g:ycm_path_to_python_interpreter='/Users/jin_zhou/.pyenv/shims/python'
+let g:ycm_python_binary_path = '/opt/homebrew/bin/python3'
+let g:ycm_path_to_python_interpreter='/opt/homebrew/bin/python3'
 " let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_seed_identifiers_with_syntax=1
@@ -332,16 +331,16 @@ let g:GeeknoteFormat="markdown"
 " set <M-n>=n " Map <BS> to delete brackets, quotes in pair
 
 " Gtags
-
 let $GTAGSLABEL='native-pygments'
 " let $GTAGSLABEL='native'
-let $GTAGSCONF='/Users/jin_zhou/.globalrc'
+let $GTAGSCONF='/Users/zhoujin/.globalrc'
 
 let g:gutentags_file_list_command = 'ag -l'
 " Debug toggle
 let g:gutentags_trace = 0
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_plus_switch = 1
+let g:gutentags_plus_nomap = 1
 " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
@@ -379,9 +378,8 @@ noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
 noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
 noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>gr :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
-
 " UlSnips
 
 " Trigger configuration. Do not use <tab> if you use
