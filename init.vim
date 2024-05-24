@@ -3,7 +3,7 @@ let &packpath = &runtimepath
 source ~/.vimrc
 tnoremap <Esc> <C-\><C-n>
 set termguicolors
-let g:python3_host_prog = "/Users/jin_zhou/.pyenv/shims/python"
+let g:python3_host_prog = "/Users/zhoujin/.pyenv/shims/python"
 
 " Plugin manager
 call plug#begin(stdpath('data') . '/plugged')
@@ -12,6 +12,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/vim-easy-align'
+Plug 'dhananjaylatkar/cscope_maps.nvim'
+Plug 'github/copilot.vim'
 
 
 call plug#end()
