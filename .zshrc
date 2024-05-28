@@ -1,34 +1,25 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/tools:$PATH:/usr/local/bin
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
 # export PATH=$HOME/tools:$PATH:/usr/local/bin:$HOME/anaconda3/bin
 export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64:$LD_LIBRARY_PATH
-export PYTHONPAT=/Users/jin_zhou/.pyenv/versions/3.7.11/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages
 
 # splint
 #export PATH=$HOME/tools/splint-3.1.1/bin:$PATH
 #export LARCH_PATH=$HOME/tools/splint-3.1.1/lib
 #export LCLIMPORTDIR=$HOME/tools/splint-3.1.1/imports
 
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-
-export ANDROID_NDK_HOME=/Users/jin_zhou/Library/Android/sdk/ndk/android-ndk-r16b
-export ANDROID_NDK=/Users/jin_zhou/Library/Android/sdk/ndk/android-ndk-r16b
-export NDK_ROOT=/Users/jin_zhou/Library/Android/sdk/ndk/android-ndk-r16b
-export NDK_HOME=/Users/jin_zhou/Library/Android/sdk/ndk/android-ndk-r16b
-
-export PATH=$PATH:$NDK_HOME
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="ys"
 
-alias mvim=/Applications/MacVim.app/Contents/MacOS/MacVim
+HISTSIZE=1000
+SAVEHIST=1000
+
 alias vim=/usr/local/bin/nvim
 alias vi=vim
 alias vimdiff='vimdiff +"windo set wrap"'
@@ -135,7 +126,8 @@ alias v=nvim
 alias gt="ctags -R ."
 alias hl="hg log -b . -G -l"
 alias vimdiff='vimdiff +"windo set wrap"'
-alias sa='source activate'
+alias ca='conda activate'
+alias ce='conda deactivate'
 
 alias c='_a(){cd $1 ; ll}; _a $1' 
 
@@ -191,4 +183,4 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-source ~/.lc-completion.bash
+# source ~/.lc-completion.bash
