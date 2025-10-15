@@ -80,7 +80,9 @@ autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType py setlocal shiftwidth=4 tabstop=4
 
 call vundle#begin()
+Plugin 'wesQ3/vim-windowswap'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -100,8 +102,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'godlygeek/tabular'
 Plugin 'skywind3000/vim-preview'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'skywind3000/gutentags_plus'
+" Plugin 'ludovicchabant/vim-gutentags'
+" Plugin 'skywind3000/gutentags_plus'
 " Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'ervandew/supertab'
@@ -133,19 +135,19 @@ map <Leader><Leader>l <Plug>(easymotion-bd-jk)
 
 " nerdtree config
 " 打开/关闭 NERDTree
-function! MyNERDTreeToggle()
-  if g:NERDTree.IsOpen()
-    NERDTreeClose
-  else
-    NERDTree
-    NERDTreeFocus
-  endif
-endfunction
+" function! MyNERDTreeToggle()
+"   if g:NERDTree.IsOpen()
+"     NERDTreeClose
+"   else
+"     NERDTree
+"     NERDTreeFocus
+"   endif
+" endfunction
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
     \ quit | endif
-nnoremap <C-n> :call MyNERDTreeToggle()<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <Leader>nf :NERDTreeFind<CR>
 let g:NERDTreeWinPos = "right"
 
@@ -186,12 +188,61 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='dracula'
+" 窗口编号显示配置
+let g:airline#extensions#windowswap#enabled = 1
+
+" 自定义状态栏布局，包含窗口编号
+" let g:airline_section_a = airline#section#create_left(['mode', 'crypt', 'paste', 'spell', 'capslock', 'winnr'])
+let g:airline_section_a = '[%{winnr()}] %{airline#util#wrap(airline#parts#mode(),0)}'
+" 在状态栏显示窗口编号
+let g:airline_section_b = airline#section#create(['hunks', 'branch'])
+let g:airline_section_c = airline#section#create(['%<', 'file', 'readonly'])
+let g:airline_section_x = airline#section#create_right(['tagbar', 'filetype'])
+let g:airline_section_y = airline#section#create_right(['ffenc'])
+let g:airline_section_z = airline#section#create(['windowswap', '%3p%%', 'linenr', 'maxlinenr', 'colnr'])
+
+" 窗口编号的快捷键映射
+nnoremap <leader>1 1<C-w>w
+nnoremap <leader>2 2<C-w>w
+nnoremap <leader>3 3<C-w>w
+nnoremap <leader>4 4<C-w>w
+nnoremap <leader>5 5<C-w>w
+
+" 标签页和缓冲区设置
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+" 文件名格式
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#fnamemod = ':t'
+" 关闭按钮
+let g:airline#extensions#tabline#show_close_button = 0
+" 排除某些文件类型
+let g:airline#extensions#tabline#excludes = ['defx', 'nerdtree']
+" 非活动窗口配置 - 关键设置
+let g:airline_inactive_collapse = 0
+let g:airline_inactive_alt_sep = 0
+
+" 为非活动窗口自定义状态栏段
+function! SetInactiveSections()
+  let w:airline_section_a = '[' . winnr() . ']'
+  let w:airline_section_b = ''
+  let w:airline_section_c = '%f'
+  let w:airline_section_x = ''
+  let w:airline_section_y = ''
+  let w:airline_section_z = '%l/%L'
+endfunction
+
+" 在窗口进入时设置非活动状态栏
+autocmd WinEnter * call SetInactiveSections()
+autocmd WinLeave * call SetInactiveSections()
+
+
 
 " tagbar config 
 nmap <F10> :TagbarToggle<CR>
 " YCM config
-let g:ycm_python_binary_path = '/opt/homebrew/bin/python3'
-let g:ycm_path_to_python_interpreter='/opt/homebrew/bin/python3'
+let g:ycm_python_binary_path = '/Users/jamesjzhou/.pyenv/shims/python'
+let g:ycm_path_to_python_interpreter='/Users/jamesjzhou/.pyenv/shims/python'
 " let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 let g:ycm_seed_identifiers_with_syntax=1
@@ -412,7 +463,7 @@ let g:VM_theme = 'sand'
 
 
 "Shortcut key
-noremap <Leader>s :update<CR>
+noremap <Leader>ss :update<CR>
 noremap <Leader>gs :vimgrep  **/*.<C-R>=expand("%:e")<CR><S-Left><Left>
 noremap <Leader>ws :vimgrep <C-R><C-W> **/*.<C-R>=expand("%:e")<CR><CR>
 noremap <Leader>tt :terminal<CR>
@@ -443,9 +494,14 @@ inoremap  <C-d> <DELETE>
 "map # #<C-o>
 
 "Tabs config"
-noremap <S-l> gt
-noremap <S-h> gT
+" noremap <S-l> gt
+" noremap <S-h> gT
 syntax on
+
+" 将 H 映射为移动到行首
+nnoremap H ^
+" 将 L 映射为移动到行尾  
+nnoremap L $
 
 " QuickFix List Toggler
 " command -bang -nargs=? QFix call QFixToggle(<bang>0)
